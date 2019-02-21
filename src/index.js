@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createHistory from 'history/createBrowserHistory'
+import { connectRouter, ConnectedRouter } from 'connected-react-router'
 import './index.css';
 import App from './App';
 import { createStore, applyMiddleware } from 'redux'
@@ -10,11 +12,17 @@ import logger from 'redux-logger'
 import { apiMiddleware } from 'redux-api-middleware'
 const middlewares = [thunk, apiMiddleware, logger]
 
+// const history = createHistory()
 const store = createStore(rootReducer, applyMiddleware(...middlewares))
+// const store = createStore(connectRouter(history)(rootReducer), applyMiddleware(...middlewares))
 
 const MainApp = () => (
     <Provider store={store}>
-      <App />
+        {/* <ConnectedRouter history={history}> */}
+            <div>
+                <App />
+            </div>
+        {/* </ConnectedRouter> */}
     </Provider>
   )
 
